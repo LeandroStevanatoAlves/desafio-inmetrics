@@ -1,0 +1,10 @@
+[project]
+name = "desafio-inmetrics"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "behave>=1.2.6",
+    "playwright>=1.52.0",
+]
