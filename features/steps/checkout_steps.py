@@ -1,4 +1,5 @@
 from behave import given, when, then
+from playwright.sync_api import expect
 
 
 @given(u'que o cliente está logado')
@@ -38,7 +39,7 @@ def step_impl(context):
     master_credit_mes = "09"
     master_credit_ano = "2028"
     context.page.get_by_role("img", name="Master credit").click()
-    #context.page.get_by_text("Edit", exact=True).click()
+    context.page.get_by_text("Edit", exact=True).click()
     context.page.locator("#creditCard").fill(master_credit_numero)
     context.page.locator("input[name='cvv_number']").fill(master_credit_cvv)
     context.page.locator("select[name='mmListbox']").select_option(f"string:{master_credit_mes}")
@@ -60,11 +61,10 @@ def step_impl(context):
 
 @then(u'a compra é finalizada com sucesso')
 def step_impl(context):
+    expect(context.page).to_have_url("https://advantageonlineshopping.com/#/orderPayment")
+
     titulo_order_payment = context.page.locator("xpath=/html/body/div[3]/section/article/h3")
     assert "ORDER PAYMENT" in titulo_order_payment.inner_text()
 
     mensagem_thank_you = context.page.locator("xpath=//*[@id='orderPaymentSuccess']/h2/span")
     assert "Thank you for buying with Advantage" in mensagem_thank_you.inner_text()
-
-    metodo_pagamento = context.page.locator("xpath=//*[@id='orderPaymentSuccess']/div/div[2]/div[1]/label")
-    #assert "SafePay" in metodo_pagamento.inner_text()

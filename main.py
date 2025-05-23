@@ -1,3 +1,4 @@
+from playwright.async_api import expect
 from playwright.sync_api import sync_playwright
 
 def main():
@@ -49,8 +50,14 @@ def main():
     mensagem_thank_you = page.locator("xpath=//*[@id='orderPaymentSuccess']/h2/span")
     assert "Thank you for buying with Advantage" in mensagem_thank_you.inner_text()
 
-    metodo_pagamento = page.locator("xpath=//*[@id='orderPaymentSuccess']/div/div[2]/div[1]/label")
-    assert "SafePay" in metodo_pagamento.inner_text()
+    metodo_pagamento = page.locator("xpath=//*[@id='orderPaymentSuccess']/div/div[2]/div[1]/label").inner_text()
+    metodo_pagamento2 = page.locator("xpath=//*[@id='orderPaymentSuccess']/div/div[2]/div[1]/label").all_inner_texts()
+    print("----------")
+    print(f"{metodo_pagamento2[0]}\n")
+    print("----------")
+    #assert "SafePay" in metodo_pagamento.inner_text()
+    expect(metodo_pagamento).to_have_text("SafePay")
+    assert "SafePay" == metodo_pagamento.inner_text(), f"esperado: 'SafePay' - recebido: '{metodo_pagamento}'"
 
 if __name__ == "__main__":
     main()
