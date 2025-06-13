@@ -6,5 +6,8 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "behave>=1.2.6",
+    "faker>=37.3.0",
     "playwright>=1.52.0",
+    "requests>=2.32.3",
+    "unidecode>=1.4.0",
 ]

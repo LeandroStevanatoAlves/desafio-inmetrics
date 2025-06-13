@@ -1,18 +1,16 @@
 from behave import given, when, then
 from playwright.sync_api import expect
+from model.usuario import Usuario
 
 
 @given(u'que o cliente está logado')
 def step_impl(context):
     context.page.goto(context.base_url)
 
-    username = "fulano1"
-    password = "Aa123456"
-
     # Login
     context.page.click("#hrefUserIcon")
-    context.page.fill("input[name='username']", username)
-    context.page.fill("input[name='password']", password)
+    context.page.fill("input[name='username']", context.usuario_user_valido.get_loginname())
+    context.page.fill("input[name='password']", context.usuario_user_valido.senha)
     context.page.click("#sign_in_btn")
 
 
@@ -28,24 +26,12 @@ def step_impl(context):
     context.page.click("#menuCart")
     context.page.click("#checkOutButton")
     context.page.click("#next_btn")
-    #breakpoint()
 
 
-@when(u'realiza o pagamento com cartão de crédito')
+@when(u'realiza o pagamento com MasterCredit')
 def step_impl(context):
-    master_credit_nome = "Fulano da Silva"
-    master_credit_numero = "1234 5678 9012"
-    master_credit_cvv = "456"
-    master_credit_mes = "09"
-    master_credit_ano = "2028"
     context.page.get_by_role("img", name="Master credit").click()
-    context.page.get_by_text("Edit", exact=True).click()
-    context.page.locator("#creditCard").fill(master_credit_numero)
-    context.page.locator("input[name='cvv_number']").fill(master_credit_cvv)
-    context.page.locator("select[name='mmListbox']").select_option(f"string:{master_credit_mes}")
-    context.page.locator("select[name='yyyyListbox']").select_option(f"string:{master_credit_ano}")
-    context.page.locator("input[name='cardholder_name']").fill(master_credit_nome)
-    context.page.locator("#pay_now_btn_ManualPayment").click()
+    context.page.locator("#pay_now_btn_MasterCredit").click()
 
 
 @when(u'realiza o pagamento com SafePay')

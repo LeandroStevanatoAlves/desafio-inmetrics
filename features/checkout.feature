@@ -1,14 +1,14 @@
 # language: pt
 Funcionalidade: Checkout
 
-  Cenario: Checkout com sucesso usando cartão de crédito
+  Cenario: Checkout com sucesso usando MasterCredit(cartão de crédito)
     Dado que o cliente está logado
     E adiciona um produto no carrinho
     Quando realiza o checkout
-    E realiza o pagamento com cartão de crédito
+    E realiza o pagamento com MasterCredit
     Então a compra é finalizada com sucesso
 
-  Cenario:
+  Cenario: Checkout com sucesso usando SafePay
     Dado que o cliente está logado
     E adiciona um produto no carrinho
     Quando realiza o checkout

@@ -11,3 +11,5 @@ wheels/
 
 # PyCharm
 .idea/
+
+factory/__pycache__/
