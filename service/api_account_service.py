@@ -7,7 +7,7 @@ from environment import API_BASE_URL
 from utils.logger import log_api
 
 # API Account Service
-class ApiUsuarioService:
+class ApiAccountService:
     @staticmethod
     def criar_usuario(usuario: Usuario) -> int:
         endpoint = f"{API_BASE_URL}/register"
