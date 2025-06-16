@@ -3,7 +3,7 @@ import time
 import requests
 from model.usuario import Usuario
 from factory.cartao_factory import CartaoFactory
-from environment import API_BASE_URL
+from constants import API_BASE_URL
 from utils.logger import log_api
 
 # API Account Service

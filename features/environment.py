@@ -2,6 +2,7 @@ from behave import fixture, use_fixture
 from playwright.sync_api import sync_playwright
 from factory.usuario_factory import UsuarioFactory
 from service.api_account_service import ApiAccountService
+from constants import SITE_BASE_URL
 
 
 def before_all(context):
@@ -29,7 +30,7 @@ def before_scenario(context, scenario):
     print("before_scenario")
     context.browser = context.playwright.chromium.launch(headless=False)
     context.page = context.browser.new_page()
-    context.base_url = "https://advantageonlineshopping.com/#/"
+    context.base_url = SITE_BASE_URL
 
 def after_scenario(context, scenario):
     print("after_scenario")

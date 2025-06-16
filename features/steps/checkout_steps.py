@@ -5,7 +5,7 @@ from model.usuario import Usuario
 
 @given(u'que o cliente está logado')
 def step_impl(context):
-    context.page.goto(context.base_url)
+    context.page.goto(f"{context.base_url}/")
 
     # Login
     context.page.click("#hrefUserIcon")
@@ -41,13 +41,12 @@ def step_impl(context):
     context.page.get_by_role("img", name="Safepay").click()
     context.page.fill("input[name='safepay_username']", safepay_username)
     context.page.fill("input[name='safepay_password']", safepay_password)
-    #context.page.get_by_role("checkbox", name="save_safepay").check()
     context.page.click("#pay_now_btn_SAFEPAY")
 
 
 @then(u'a compra é finalizada com sucesso')
 def step_impl(context):
-    expect(context.page).to_have_url("https://advantageonlineshopping.com/#/orderPayment")
+    expect(context.page).to_have_url(f"{context.base_url}/orderPayment")
 
     titulo_order_payment = context.page.locator("xpath=/html/body/div[3]/section/article/h3")
     assert "ORDER PAYMENT" in titulo_order_payment.inner_text()
