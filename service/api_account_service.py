@@ -3,14 +3,14 @@ import time
 import requests
 from model.usuario import Usuario
 from factory.cartao_factory import CartaoFactory
-from constants import API_BASE_URL
+from constants import API_ACCOUNT_BASE_URL
 from utils.logger import log_api
 
 # API Account Service
 class ApiAccountService:
     @staticmethod
     def criar_usuario(usuario: Usuario) -> int:
-        endpoint = f"{API_BASE_URL}/register"
+        endpoint = f"{API_ACCOUNT_BASE_URL}/register"
         payload = {
             "accountType": usuario.tipo,
             "address": usuario.endereco,
@@ -57,7 +57,7 @@ class ApiAccountService:
 
     @staticmethod
     def login(usuario: Usuario) -> str:
-        endpoint = f"{API_BASE_URL}/login"
+        endpoint = f"{API_ACCOUNT_BASE_URL}/login"
 
         payload = {
             "email": usuario.get_email(),
@@ -93,7 +93,7 @@ class ApiAccountService:
 
     @staticmethod
     def apagar_usuario(usuario: Usuario, token: str):
-        endpoint = f"{API_BASE_URL}/delete"
+        endpoint = f"{API_ACCOUNT_BASE_URL}/delete"
 
         payload = {
             "accountId": usuario.user_id
@@ -123,7 +123,7 @@ class ApiAccountService:
 
     @staticmethod
     def adicionar_master_credit(usuario: Usuario, token: str):
-        endpoint = f"{API_BASE_URL}/addMasterCredit"
+        endpoint = f"{API_ACCOUNT_BASE_URL}/addMasterCredit"
 
         cartao = CartaoFactory.criar(usuario)
 
@@ -162,7 +162,7 @@ class ApiAccountService:
 
     @staticmethod
     def health_check():
-        endpoint = f"{API_BASE_URL}/health-check"
+        endpoint = f"{API_ACCOUNT_BASE_URL}/health-check"
 
         payload = {}
         headers = {}
