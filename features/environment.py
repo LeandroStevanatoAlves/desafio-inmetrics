@@ -4,6 +4,7 @@ from factory.usuario_factory import UsuarioFactory
 from service.api_account_service import ApiAccountService
 from service.api_mastercredit import ApiMasterCredit
 from service.api_order import ApiOrder
+from service.api_safepay import ApiSafePay
 from constants import SITE_BASE_URL
 
 
@@ -12,6 +13,7 @@ def before_all(context):
     ApiAccountService.health_check()
     ApiMasterCredit.health_check()
     ApiOrder.health_check()
+    ApiSafePay.health_check()
 
     # Cria usuário do tipo USER
     context.usuario_user_valido = UsuarioFactory().criar_usuario()
