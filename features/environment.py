@@ -2,13 +2,15 @@ from behave import fixture, use_fixture
 from playwright.sync_api import sync_playwright
 from factory.usuario_factory import UsuarioFactory
 from service.api_account_service import ApiAccountService
+from service.api_mastercredit import ApiMasterCredit
 from service.api_order import ApiOrder
 from constants import SITE_BASE_URL
 
 
 def before_all(context):
-    # Faz o Health Check das APIs
+    # Faz o Health Check nas APIs
     ApiAccountService.health_check()
+    ApiMasterCredit.health_check()
     ApiOrder.health_check()
 
     # Cria usuário do tipo USER
