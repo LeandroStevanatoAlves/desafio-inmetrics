@@ -7,9 +7,6 @@ class HomePage():
         self.password_input = page.locator("input[name='password']")
         self.sign_in_button = page.locator("#sign_in_btn")
 
-    def open_page(self):
-        self.pa
-
     def open_login_modal(self):
         self.user_icon.click()
         expect(self.username_input).to_be_visible()
