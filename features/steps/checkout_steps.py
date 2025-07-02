@@ -1,13 +1,9 @@
 from behave import given, when, then
 from playwright.sync_api import expect
-from model.usuario import Usuario
 
 
 @given(u'que o cliente está logado')
 def step_impl(context):
-    context.page.goto(f"{context.base_url}/")
-
-    # Login
     context.page.click("#hrefUserIcon")
     context.page.fill("input[name='username']", context.usuario_user_valido.get_loginname())
     context.page.fill("input[name='password']", context.usuario_user_valido.senha)

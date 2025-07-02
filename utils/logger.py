@@ -1,6 +1,9 @@
 import requests.models
 
 
+def log(mensagem: str):
+    print(f"==========[ {mensagem} ]==========\n")
+
 def log_api(mensagem: str, tempo_total: float, endpoint: str, request_headers: dict, request_body: dict, response: requests.models.Response):
     print(f"==========[ {mensagem} ]==========")
     print(f"Tempo de execução: {tempo_total:.3f}s")

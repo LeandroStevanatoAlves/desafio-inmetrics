@@ -1,7 +1,7 @@
 # language: pt
 Funcionalidade: Checkout
 
-  Cenario: Checkout com sucesso usando MasterCredit(cartão de crédito)
+  Cenario: Checkout com sucesso usando MasterCredit (cartão de crédito)
     Dado que o cliente está logado
     E adiciona um produto no carrinho
     Quando realiza o checkout
