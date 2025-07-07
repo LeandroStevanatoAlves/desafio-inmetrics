@@ -4,7 +4,7 @@ from playwright.sync_api import expect
 
 @given(u'que o cliente está logado')
 def step_impl(context):
-    context.home_page.login(context.usuario_user_valido.get_loginname(), context.usuario_user_valido.senha)
+    context.login_page.login(context.usuario_user_valido.get_loginname(), context.usuario_user_valido.senha)
 
 
 @given(u'adiciona um produto no carrinho')
