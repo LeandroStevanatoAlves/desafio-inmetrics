@@ -1,5 +1,6 @@
 from playwright.sync_api import sync_playwright
 from factory.usuario_factory import UsuarioFactory
+from pages.home_page import HomePage
 from pages.login_page import LoginPage
 from service.api_account_service import ApiAccountService
 from service.api_mastercredit import ApiMasterCredit
@@ -42,6 +43,7 @@ def before_scenario(context, scenario):
 
     log("Initializing Page Objects")
     context.login_page = LoginPage(context.page)
+    context.home_page = HomePage(context.page)
 
 def after_scenario(context, scenario):
     log("Closing the Playwright page")

@@ -9,7 +9,8 @@ def step_impl(context):
 
 @given(u'adiciona um produto no carrinho')
 def step_impl(context):
-    context.page.click("#tabletsImg")
+    context.home_page.select_tablets_category()
+    #context.page.click("#tabletsImg")
     context.page.click("div.categoryRight li:nth-child(1)")
     context.page.click("#productProperties button[name='save_to_cart']")
 
