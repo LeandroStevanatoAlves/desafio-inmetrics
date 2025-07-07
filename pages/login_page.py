@@ -1,5 +1,6 @@
 from playwright.sync_api import Page, expect
 
+
 class LoginPage:
     def __init__(self, page: Page):
         self.user_icon = page.locator("#hrefUserIcon")

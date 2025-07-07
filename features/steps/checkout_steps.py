@@ -13,7 +13,8 @@ def step_impl(context):
     #context.page.click("#tabletsImg")
     context.category_page.select_first_product()
     #context.page.click("div.categoryRight li:nth-child(1)")
-    context.page.click("#productProperties button[name='save_to_cart']")
+    context.product_detail_page.add_to_cart()
+    #context.page.click("#productProperties button[name='save_to_cart']")
 
 
 @when(u'realiza o checkout')

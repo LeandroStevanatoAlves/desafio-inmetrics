@@ -1,5 +1,6 @@
 from playwright.sync_api import Page
 
+
 class HomePage:
     def __init__(self, page: Page):
         self.headphones_category = page.locator("#headphonesImg")

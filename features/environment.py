@@ -3,6 +3,7 @@ from factory.usuario_factory import UsuarioFactory
 from pages.category_page import CategoryPage
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
+from pages.product_detail_page import ProductDetailPage
 from service.api_account_service import ApiAccountService
 from service.api_mastercredit import ApiMasterCredit
 from service.api_order import ApiOrder
@@ -46,6 +47,7 @@ def before_scenario(context, scenario):
     context.login_page = LoginPage(context.page)
     context.home_page = HomePage(context.page)
     context.category_page = CategoryPage(context.page)
+    context.product_detail_page = ProductDetailPage(context.page)
 
 def after_scenario(context, scenario):
     log("Closing the Playwright page")
@@ -56,6 +58,6 @@ def after_all(context):
     context.browser.close()
     context.playwright.stop()
 
-    # Apaga os usuários
+    # Delete all users that was created in this session
     ApiAccountService.apagar_usuario(context.usuario_user_valido, context.token_admin)
     ApiAccountService.apagar_usuario(context.usuario_admin_valido, context.token_admin)
