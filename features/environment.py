@@ -3,6 +3,7 @@ from factory.usuario_factory import UsuarioFactory
 from pages.category_page import CategoryPage
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
+from pages.menu_page import MenuPage
 from pages.product_detail_page import ProductDetailPage
 from service.api_account_service import ApiAccountService
 from service.api_mastercredit import ApiMasterCredit
@@ -44,6 +45,7 @@ def before_scenario(context, scenario):
     context.page.goto(f"{SITE_BASE_URL}/")
 
     log("Initializing Page Objects")
+    context.menu_page = MenuPage(context.page)
     context.login_page = LoginPage(context.page)
     context.home_page = HomePage(context.page)
     context.category_page = CategoryPage(context.page)

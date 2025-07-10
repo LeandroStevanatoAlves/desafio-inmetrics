@@ -4,17 +4,15 @@ from playwright.sync_api import expect
 
 @given(u'que o cliente está logado')
 def step_impl(context):
+    context.menu_page.open_login_modal()
     context.login_page.login(context.usuario_user_valido.get_loginname(), context.usuario_user_valido.senha)
 
 
 @given(u'adiciona um produto no carrinho')
 def step_impl(context):
     context.home_page.select_tablets_category()
-    #context.page.click("#tabletsImg")
     context.category_page.select_first_product()
-    #context.page.click("div.categoryRight li:nth-child(1)")
     context.product_detail_page.add_to_cart()
-    #context.page.click("#productProperties button[name='save_to_cart']")
 
 
 @when(u'realiza o checkout')
