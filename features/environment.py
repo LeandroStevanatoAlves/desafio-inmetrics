@@ -1,6 +1,7 @@
 from playwright.sync_api import sync_playwright
 
 from factory.cartao_factory import CardFactory
+from factory.safe_pay_factory import SafePayFactory
 from factory.usuario_factory import UsuarioFactory
 from pages.category_page import CategoryPage
 from pages.home_page import HomePage
@@ -31,10 +32,11 @@ def before_all(context):
     context.usuario_admin_valido = UsuarioFactory().criar_admin()
     context.usuario_admin_valido.user_id = ApiAccountService.create_user(context.usuario_admin_valido)
 
-    # Card
+    # Master Credit
     master_credit = CardFactory.create(context.usuario_user_valido)
 
-    #Master Credit
+    # Safe Pay
+    context.safe_pay = SafePayFactory.create(context.usuario_user_valido)
 
     # Log in with the Admin User to get the Token
     context.token_admin = ApiAccountService.login(context.usuario_admin_valido)

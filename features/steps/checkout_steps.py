@@ -31,11 +31,9 @@ def step_impl(context):
 
 @when(u'realiza o pagamento com SafePay')
 def step_impl(context):
-    safepay_username = "12345"
-    safepay_password = "Aa123456"
     context.page.get_by_role("img", name="Safepay").click()
-    context.page.fill("input[name='safepay_username']", safepay_username)
-    context.page.fill("input[name='safepay_password']", safepay_password)
+    context.page.fill("input[name='safepay_username']", context.safe_pay.username)
+    context.page.fill("input[name='safepay_password']", context.safe_pay.password)
     context.page.click("#pay_now_btn_SAFEPAY")
 
 
