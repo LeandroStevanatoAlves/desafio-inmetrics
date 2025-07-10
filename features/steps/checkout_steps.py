@@ -17,8 +17,9 @@ def step_impl(context):
 
 @when(u'realiza o checkout')
 def step_impl(context):
-    context.page.click("#menuCart")
-    context.page.click("#checkOutButton")
+    context.menu_page.open_cart_modal()
+    context.shopping_cart_page.proceed_to_checkout()
+    #context.page.click("#checkOutButton")
     context.page.click("#next_btn")
 
 

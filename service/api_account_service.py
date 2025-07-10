@@ -1,31 +1,33 @@
 import time
 
 import requests
+
+from model.cartao import Cartao
 from model.usuario import Usuario
-from factory.cartao_factory import CartaoFactory
+from factory.cartao_factory import CardFactory
 from constants import API_ACCOUNT_BASE_URL
 from utils.logger import log_api
 
 # API Account Service
 class ApiAccountService:
     @staticmethod
-    def criar_usuario(usuario: Usuario) -> int:
+    def create_user(user: Usuario) -> int:
         endpoint = f"{API_ACCOUNT_BASE_URL}/register"
         payload = {
-            "accountType": usuario.tipo,
-            "address": usuario.endereco,
+            "accountType": user.tipo,
+            "address": user.endereco,
             "allowOffersPromotion": True,
             "aobUser": True,
-            "cityName": usuario.cidade,
+            "cityName": user.cidade,
             "country": "BRAZIL_BR",
-            "email": usuario.get_email(),
-            "firstName": usuario.primeiro_nome,
-            "lastName": usuario.ultimo_nome,
-            "loginName": usuario.get_loginname(),
-            "password": usuario.senha,
-            "phoneNumber": usuario.telefone,
-            "stateProvince": usuario.estado,
-            "zipcode": usuario.cep
+            "email": user.get_email(),
+            "firstName": user.primeiro_nome,
+            "lastName": user.ultimo_nome,
+            "loginName": user.get_loginname(),
+            "password": user.senha,
+            "phoneNumber": user.telefone,
+            "stateProvince": user.estado,
+            "zipcode": user.cep
         }
 
         headers = {
@@ -39,7 +41,7 @@ class ApiAccountService:
         tempo_total = time.time() - tempo_inicial
 
         log_api(
-            f"Criando usuário {usuario.tipo}",
+            f"Creating user {user.tipo}",
             tempo_total,
             endpoint,
             headers,
@@ -49,10 +51,10 @@ class ApiAccountService:
 
         response.raise_for_status()
         if not response_data["response"]["success"]:
-            raise Exception(f"Erro na criação de usuário: {response_data}")
+            raise Exception(f"Error creating user: {response_data}")
 
         user_id = response_data["response"]["userId"]
-        print(f"Usuário criado com o userId: {user_id}\n")
+        print(f"User created with userId: {user_id}\n")
         return user_id
 
     @staticmethod
@@ -75,7 +77,7 @@ class ApiAccountService:
         tempo_total = time.time() - tempo_inicial
 
         log_api(
-            f"Login usuário {usuario.tipo}",
+            f"Login with user {usuario.tipo}",
             tempo_total,
             endpoint,
             headers,
@@ -85,18 +87,18 @@ class ApiAccountService:
 
         response.raise_for_status()
         if not response_data["statusMessage"]["success"]:
-            raise Exception(f"Erro no login: {response_data}")
+            raise Exception(f"Login error: {response_data}")
 
         token = response_data["statusMessage"]["token"]
-        print(f"Usuário efetuou Login e recebeu o Token: {token}\n")
+        print(f"User logged in and received the Token: {token}\n")
         return token
 
     @staticmethod
-    def apagar_usuario(usuario: Usuario, token: str):
+    def delete_user(user: Usuario, token: str):
         endpoint = f"{API_ACCOUNT_BASE_URL}/delete"
 
         payload = {
-            "accountId": usuario.user_id
+            "accountId": user.user_id
         }
         headers = {
             'accept': '*/*',
@@ -110,7 +112,7 @@ class ApiAccountService:
         tempo_total = time.time() - tempo_inicial
 
         log_api(
-            f"Apagando usuário com AccountId {usuario.user_id}",
+            f"Deleting user with AccountId {user.user_id}",
             tempo_total,
             endpoint,
             headers, payload,
@@ -119,21 +121,19 @@ class ApiAccountService:
 
         response.raise_for_status()
         if not response_data["statusMessage"]["success"]:
-            raise Exception(f"Erro ao apagar o usuário: {response_data}\n")
+            raise Exception(f"Error deleting user: {response_data}\n")
 
     @staticmethod
-    def adicionar_master_credit(usuario: Usuario, token: str):
+    def add_master_credit(user: Usuario, token: str, credit_card: Cartao):
         endpoint = f"{API_ACCOUNT_BASE_URL}/addMasterCredit"
 
-        cartao = CartaoFactory.criar(usuario)
-
         payload = {
-            "accountId": usuario.user_id,
-            "base64Token": usuario.get_base64_token(),
-            "cardNumber": cartao.card_number,
-            "customerName": cartao.customer_name,
-            "cvvNumber": cartao.cvv,
-            "expirationDate": cartao.expiration_date
+            "accountId": user.user_id,
+            "base64Token": user.get_base64_token(),
+            "cardNumber": credit_card.card_number,
+            "customerName": credit_card.customer_name,
+            "cvvNumber": credit_card.cvv,
+            "expirationDate": credit_card.expiration_date
         }
 
         headers = {
@@ -148,7 +148,7 @@ class ApiAccountService:
         tempo_total = time.time() - tempo_inicial
 
         log_api(
-            f"Adicionando Master Credit ao usuário com AccountId {usuario.user_id}",
+            f"Adding Master Credit to User with AccountId {user.user_id}",
             tempo_total,
             endpoint,
             headers,
@@ -158,7 +158,7 @@ class ApiAccountService:
 
         response.raise_for_status()
         if not response_data["response"]["success"]:
-            raise Exception(f"Erro no login: {response_data}")
+            raise Exception(f"Login error: {response_data}")
 
     @staticmethod
     def health_check():
@@ -174,7 +174,7 @@ class ApiAccountService:
 
         # Log
         log_api(
-            "Fazendo o Health Check em Account Service",
+            "Performing the Health Check in Account Service",
             tempo_total,
             endpoint,
             headers,
@@ -184,4 +184,4 @@ class ApiAccountService:
 
         response.raise_for_status()
         if response_data != "Success":
-            raise Exception(f"Erro no health check: {response_data}")
+            raise Exception(f"Health check error: {response_data}")

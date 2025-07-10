@@ -1,10 +1,13 @@
 from playwright.sync_api import sync_playwright
+
+from factory.cartao_factory import CardFactory
 from factory.usuario_factory import UsuarioFactory
 from pages.category_page import CategoryPage
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
 from pages.menu_page import MenuPage
 from pages.product_detail_page import ProductDetailPage
+from pages.shopping_cart_page import ShoppingCartPage
 from service.api_account_service import ApiAccountService
 from service.api_mastercredit import ApiMasterCredit
 from service.api_order import ApiOrder
@@ -22,17 +25,22 @@ def before_all(context):
 
     # Creates user of type USER
     context.usuario_user_valido = UsuarioFactory().criar_usuario()
-    context.usuario_user_valido.user_id = ApiAccountService.criar_usuario(context.usuario_user_valido)
+    context.usuario_user_valido.user_id = ApiAccountService.create_user(context.usuario_user_valido)
 
     # Creates user of type ADMIN
     context.usuario_admin_valido = UsuarioFactory().criar_admin()
-    context.usuario_admin_valido.user_id = ApiAccountService.criar_usuario(context.usuario_admin_valido)
+    context.usuario_admin_valido.user_id = ApiAccountService.create_user(context.usuario_admin_valido)
+
+    # Card
+    master_credit = CardFactory.create(context.usuario_user_valido)
+
+    #Master Credit
 
     # Log in with the Admin User to get the Token
     context.token_admin = ApiAccountService.login(context.usuario_admin_valido)
 
     # Add a card to the user User
-    ApiAccountService.adicionar_master_credit(context.usuario_user_valido, context.token_admin)
+    ApiAccountService.add_master_credit(context.usuario_user_valido, context.token_admin, master_credit)
 
     log("Starting Playwright")
     context.playwright = sync_playwright().start()
@@ -50,6 +58,7 @@ def before_scenario(context, scenario):
     context.home_page = HomePage(context.page)
     context.category_page = CategoryPage(context.page)
     context.product_detail_page = ProductDetailPage(context.page)
+    context.shopping_cart_page = ShoppingCartPage(context.page)
 
 def after_scenario(context, scenario):
     log("Closing the Playwright page")
@@ -61,5 +70,5 @@ def after_all(context):
     context.playwright.stop()
 
     # Delete all users that was created in this session
-    ApiAccountService.apagar_usuario(context.usuario_user_valido, context.token_admin)
-    ApiAccountService.apagar_usuario(context.usuario_admin_valido, context.token_admin)
+    ApiAccountService.delete_user(context.usuario_user_valido, context.token_admin)
+    ApiAccountService.delete_user(context.usuario_admin_valido, context.token_admin)

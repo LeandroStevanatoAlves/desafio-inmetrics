@@ -3,15 +3,15 @@ from model.cartao import Cartao
 from model.usuario import Usuario
 
 
-class CartaoFactory:
+class CardFactory:
     @staticmethod
-    def criar(usuario: Usuario) -> Cartao:
-        ano_atual = datetime.now().year
-        # Utiliza o ano do vencimento como sendo 5 anos no futuro
-        ano_futuro = str(ano_atual + 5)[-2:]
+    def create(user: Usuario) -> Cartao:
+        year_current = datetime.now().year
+        # Due date will be in 5 years in the future
+        year_future = str(year_current + 5)[-2:]
         return Cartao(
             "4886123456789012",
-            f"{usuario.primeiro_nome} {usuario.ultimo_nome}",
+            f"{user.primeiro_nome} {user.ultimo_nome}",
             "567",
-            f"1220{ano_futuro}"
+            f"1220{year_future}"
         )
