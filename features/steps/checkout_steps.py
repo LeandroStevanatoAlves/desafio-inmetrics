@@ -19,8 +19,8 @@ def step_impl(context):
 def step_impl(context):
     context.menu_page.open_cart_modal()
     context.shopping_cart_page.proceed_to_checkout()
-    #context.page.click("#checkOutButton")
-    context.page.click("#next_btn")
+    context.shipping_details_page.click_next()
+    #context.page.click("#next_btn")
 
 
 @when(u'realiza o pagamento com MasterCredit')

@@ -8,6 +8,7 @@ from pages.home_page import HomePage
 from pages.login_page import LoginPage
 from pages.menu_page import MenuPage
 from pages.product_detail_page import ProductDetailPage
+from pages.shipping_details_page import ShippingDetailsPage
 from pages.shopping_cart_page import ShoppingCartPage
 from service.api_account_service import ApiAccountService
 from service.api_mastercredit import ApiMasterCredit
@@ -61,6 +62,7 @@ def before_scenario(context, scenario):
     context.category_page = CategoryPage(context.page)
     context.product_detail_page = ProductDetailPage(context.page)
     context.shopping_cart_page = ShoppingCartPage(context.page)
+    context.shipping_details_page = ShippingDetailsPage(context.page)
 
 def after_scenario(context, scenario):
     log("Closing the Playwright page")
