@@ -1,16 +1,16 @@
-# language: pt
-Funcionalidade: Checkout
+# language: en
+Feature: Checkout
 
-  Cenario: Checkout com sucesso usando MasterCredit (cartão de crédito)
-    Dado que o cliente está logado
-    E adiciona um produto no carrinho
-    Quando realiza o checkout
-    E realiza o pagamento com MasterCredit
-    Então a compra é finalizada com sucesso
+  Scenario: Successful checkout using MasterCredit (credit card)
+    Given the customer is logged in
+    And adds a product to the cart
+    When they proceed to checkout
+    And make a payment with MasterCredit
+    Then the purchase is completed successfully
 
-  Cenario: Checkout com sucesso usando SafePay
-    Dado que o cliente está logado
-    E adiciona um produto no carrinho
-    Quando realiza o checkout
-    E realiza o pagamento com SafePay
-    Então a compra é finalizada com sucesso
+  Scenario: Successful checkout using SafePay
+    Given the customer is logged in
+    And adds a product to the cart
+    When they proceed to checkout
+    And make a payment with SafePay
+    Then the purchase is completed successfully
