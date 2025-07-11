@@ -20,21 +20,22 @@ def step_impl(context):
     context.menu_page.open_cart_modal()
     context.shopping_cart_page.proceed_to_checkout()
     context.shipping_details_page.click_next()
-    #context.page.click("#next_btn")
 
 
 @when(u'realiza o pagamento com MasterCredit')
 def step_impl(context):
-    context.page.get_by_role("img", name="Master credit").click()
-    context.page.locator("#pay_now_btn_MasterCredit").click()
+    context.payment_page.select_master_credit_and_pay()
+    #context.page.get_by_role("img", name="Master credit").click()
+    #context.page.locator("#pay_now_btn_MasterCredit").click()
 
 
 @when(u'realiza o pagamento com SafePay')
 def step_impl(context):
-    context.page.get_by_role("img", name="Safepay").click()
-    context.page.fill("input[name='safepay_username']", context.safe_pay.username)
-    context.page.fill("input[name='safepay_password']", context.safe_pay.password)
-    context.page.click("#pay_now_btn_SAFEPAY")
+    context.payment_page.select_safepay_and_pay(context.safepay)
+    #context.page.get_by_role("img", name="Safepay").click()
+    #context.page.fill("input[name='safepay_username']", context.safepay.username)
+    #context.page.fill("input[name='safepay_password']", context.safepay.password)
+    #context.page.click("#pay_now_btn_SAFEPAY")
 
 
 @then(u'a compra é finalizada com sucesso')

@@ -7,6 +7,7 @@ from pages.category_page import CategoryPage
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
 from pages.menu_page import MenuPage
+from pages.payment_page import PaymentPage
 from pages.product_detail_page import ProductDetailPage
 from pages.shipping_details_page import ShippingDetailsPage
 from pages.shopping_cart_page import ShoppingCartPage
@@ -37,7 +38,7 @@ def before_all(context):
     master_credit = CardFactory.create(context.usuario_user_valido)
 
     # Safe Pay
-    context.safe_pay = SafePayFactory.create(context.usuario_user_valido)
+    context.safepay = SafePayFactory.create(context.usuario_user_valido)
 
     # Log in with the Admin User to get the Token
     context.token_admin = ApiAccountService.login(context.usuario_admin_valido)
@@ -63,6 +64,7 @@ def before_scenario(context, scenario):
     context.product_detail_page = ProductDetailPage(context.page)
     context.shopping_cart_page = ShoppingCartPage(context.page)
     context.shipping_details_page = ShippingDetailsPage(context.page)
+    context.payment_page = PaymentPage(context.page)
 
 def after_scenario(context, scenario):
     log("Closing the Playwright page")
