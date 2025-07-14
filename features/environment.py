@@ -7,6 +7,7 @@ from pages.category_page import CategoryPage
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
 from pages.menu_page import MenuPage
+from pages.order_confirmation_page import OrderConfirmationPage
 from pages.payment_page import PaymentPage
 from pages.product_detail_page import ProductDetailPage
 from pages.shipping_details_page import ShippingDetailsPage
@@ -56,7 +57,7 @@ def before_scenario(context, scenario):
     context.base_url = SITE_BASE_URL
     context.page.goto(f"{SITE_BASE_URL}/")
 
-    log("Initializing Page Objects")
+    log("Initializing all Page Objects")
     context.menu_page = MenuPage(context.page)
     context.login_page = LoginPage(context.page)
     context.home_page = HomePage(context.page)
@@ -65,6 +66,7 @@ def before_scenario(context, scenario):
     context.shopping_cart_page = ShoppingCartPage(context.page)
     context.shipping_details_page = ShippingDetailsPage(context.page)
     context.payment_page = PaymentPage(context.page)
+    context.order_confirmation_page = OrderConfirmationPage(context.page)
 
 def after_scenario(context, scenario):
     log("Closing the Playwright page")

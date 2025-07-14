@@ -12,9 +12,3 @@ class MenuPage:
 
     def open_cart_modal(self):
         self.shopping_cart_icon.click()
-
-    #def login(self, username: str, password: str):
-    #    self.open_login_modal()
-    #    self.username_input.fill(username)
-    #    self.password_input.fill(password)
-    #    self.sign_in_button.click()

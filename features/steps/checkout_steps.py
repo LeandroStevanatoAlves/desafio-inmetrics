@@ -41,9 +41,7 @@ def step_impl(context):
 @then(u'the purchase is completed successfully')
 def step_impl(context):
     expect(context.page).to_have_url(f"{context.base_url}/orderPayment")
-
-    titulo_order_payment = context.page.locator("xpath=/html/body/div[3]/section/article/h3")
-    assert "ORDER PAYMENT" in titulo_order_payment.inner_text()
-
-    mensagem_thank_you = context.page.locator("xpath=//*[@id='orderPaymentSuccess']/h2/span")
-    assert "Thank you for buying with Advantage" in mensagem_thank_you.inner_text()
+    context.order_confirmation_page.verify_order_payment_title()
+    context.order_confirmation_page.verify_thank_you_message()
+    context.order_confirmation_page.verify_order_number_label()
+    context.order_confirmation_page.verify_tracking_number_label()
