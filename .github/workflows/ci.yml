@@ -20,7 +20,7 @@ jobs:
         run: pip install uv
 
       - name: Install Dependencies with UV
-        run: uv pip install
+        run: uv sync
 
       - name: Install Web Browsers
         run: playwright install --with-deps
