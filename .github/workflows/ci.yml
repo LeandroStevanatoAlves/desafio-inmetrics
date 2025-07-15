@@ -24,6 +24,9 @@ jobs:
 
       - name: Install Dependencies with UV
         run: uv sync
+
+      - name: Install Web Browsers
+        run: playwright install --with-deps
         working-directory: ${{github.workspace}}
 
       - name: Run Behave Tests
