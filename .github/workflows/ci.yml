@@ -1,0 +1,29 @@
+name: Test CI with Python, Behave, and PlayWright
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Source Code Checkout
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install UV
+        run: pip install uv
+
+      - name: Install Dependencies with UV
+        run: uv pip install -r pyproject.toml
+
+      - name: Install Web Browsers
+        run: playwright install --with-deps
+
+      - name: Run Behave Tests
+        run: behave
