@@ -20,7 +20,7 @@ jobs:
         run: pip install uv
 
       - name: Install Dependencies with UV
-        run: uv pip install -r pyproject.toml
+        run: uv pip install
 
       - name: Install Web Browsers
         run: playwright install --with-deps
