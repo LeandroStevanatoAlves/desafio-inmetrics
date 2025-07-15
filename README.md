@@ -13,6 +13,6 @@ Durante a execução o projeto primeiramente faz um healthcheck em todos os endp
 ```bash
 uv venv .venv
 source .venv/bin/activate
-uv pip install -r pyproject.toml
+uv sync
 playwright install
 behave

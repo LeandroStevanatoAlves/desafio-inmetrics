@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Source Code Checkout
+      - name: Checkout Source Code
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -25,9 +25,6 @@ jobs:
       - name: Install Dependencies with UV
         run: uv sync
         working-directory: ${{github.workspace}}
-
-      - name: Install Web Browsers
-        run: playwright install --with-deps
 
       - name: Run Behave Tests
         run: behave
