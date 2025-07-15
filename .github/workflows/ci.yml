@@ -26,8 +26,7 @@ jobs:
         run: uv sync
 
       - name: Install Web Browsers
-        run: playwright install --with-deps
-        working-directory: ${{github.workspace}}
+        run: python -m playwright install --with-deps
 
       - name: Run Behave Tests
         run: behave
