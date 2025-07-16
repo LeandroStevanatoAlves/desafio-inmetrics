@@ -25,8 +25,10 @@ jobs:
       - name: Install Dependencies with UV
         run: uv sync
 
+      - run: ls
+
       - name: Install Web Browsers
-        run: ./.venv/Scripts/playwright install --with-deps
+        run: uv run playwright install --with-deps
 
       - name: Run Behave Tests
-        run: ./.venv/Scripts/behave
+        run: uv run behave
