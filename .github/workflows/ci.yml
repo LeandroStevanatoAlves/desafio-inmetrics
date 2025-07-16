@@ -25,10 +25,14 @@ jobs:
       - name: Install Dependencies with UV
         run: uv sync
 
-      - run: ls
-
       - name: Install Web Browsers
         run: uv run playwright install --with-deps
 
       - name: Run Behave Tests
-        run: uv run behave
+        run: uv run behave -o behave-report.txt
+
+      - name: Store Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: behave-report.txt

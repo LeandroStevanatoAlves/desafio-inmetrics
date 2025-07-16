@@ -17,6 +17,7 @@ from service.api_mastercredit import ApiMasterCredit
 from service.api_order import ApiOrder
 from service.api_safepay import ApiSafePay
 from constants import SITE_BASE_URL
+from utils.ci_cd import is_on_github_actions
 from utils.logger import log
 
 
@@ -49,7 +50,7 @@ def before_all(context):
 
     log("Starting Playwright")
     context.playwright = sync_playwright().start()
-    context.browser = context.playwright.chromium.launch(headless=False)
+    context.browser = context.playwright.chromium.launch(headless=is_on_github_actions())
 
 def before_scenario(context, scenario):
     log("Creating a new Playwright page")
