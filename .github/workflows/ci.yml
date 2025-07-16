@@ -26,7 +26,7 @@ jobs:
         run: uv sync
 
       - name: Install Web Browsers
-        run: python -m playwright install --with-deps
+        run: ./.venv/Scripts/playwright install --with-deps
 
       - name: Run Behave Tests
-        run: behave
+        run: ./.venv/Scripts/behave
