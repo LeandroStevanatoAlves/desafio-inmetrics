@@ -8,7 +8,6 @@ class MenuPage:
 
     def open_login_modal(self):
         self.user_icon.click()
-        #expect(self.username_input).to_be_visible()
 
     def open_cart_modal(self):
         self.shopping_cart_icon.click()

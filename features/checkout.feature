@@ -19,4 +19,4 @@ Feature: Checkout
     Given the customer is not logged in
     And adds a product to the cart
     When they proceed to checkout
-    Then the purchase is completed successfully
+    Then the customer is redirected to the login screen
