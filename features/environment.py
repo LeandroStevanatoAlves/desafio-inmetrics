@@ -5,7 +5,7 @@ from factory.safe_pay_factory import SafePayFactory
 from factory.usuario_factory import UsuarioFactory
 from pages.category_page import CategoryPage
 from pages.home_page import HomePage
-from pages.login_page import LoginPage
+from pages.login_modal import LoginModal
 from pages.menu_page import MenuPage
 from pages.order_confirmation_page import OrderConfirmationPage
 from pages.payment_page import PaymentPage
@@ -60,14 +60,14 @@ def before_scenario(context, scenario):
 
     log("Initializing all Page Objects")
     context.menu_page = MenuPage(context.page)
-    context.login_page = LoginPage(context.page)
+    context.login_page = LoginModal(context.page)
     context.home_page = HomePage(context.page)
     context.category_page = CategoryPage(context.page)
     context.product_detail_page = ProductDetailPage(context.page)
     context.shopping_cart_page = ShoppingCartPage(context.page)
     context.shipping_details_page = ShippingDetailsPage(context.page)
     context.payment_page = PaymentPage(context.page)
-    context.order_confirmation_page = OrderConfirmationPage(context.page)
+    context.order_confirmation_page = OrderConfirmationPage(context.page, context.base_url)
 
 def after_scenario(context, scenario):
     log("Closing the Playwright page")

@@ -2,11 +2,12 @@ from playwright.sync_api import Page, expect
 
 
 class OrderConfirmationPage:
-    def __init__(self, page: Page):
+    def __init__(self, page: Page, base_url: str):
         self.order_confirmation_title = page.locator("xpath=/html/body/div[3]/section/article/h3")
         self.thank_you_message = page.locator("#orderPaymentSuccess h2 span")
         self.order_number_label = page.locator("#orderNumberLabel")
         self.tracking_number_label = page.locator("#trackingNumberLabel")
+        self.url = f"{base_url}/orderPayment"
 
     def verify_order_payment_title(self):
         expect(self.order_confirmation_title).to_be_visible()
@@ -21,3 +22,6 @@ class OrderConfirmationPage:
 
     def verify_tracking_number_label(self):
         expect(self.tracking_number_label).not_to_be_empty()
+
+    def verify_url(self, page: Page):
+        expect(page).to_have_url(self.url)

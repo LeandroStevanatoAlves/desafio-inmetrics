@@ -14,3 +14,9 @@ Feature: Checkout
     When they proceed to checkout
     And make a payment with SafePay
     Then the purchase is completed successfully
+
+  Scenario: It is not possible to checkout without being logged in
+    Given the customer is not logged in
+    And adds a product to the cart
+    When they proceed to checkout
+    Then the purchase is completed successfully
