@@ -19,7 +19,7 @@ from service.api_order import ApiOrder
 from service.api_safepay import ApiSafePay
 from constants import SITE_BASE_URL
 from utils.ci_cd import is_on_github_actions
-from utils.logger import log
+from utils.logger import log_message
 
 
 def before_all(context):
@@ -49,17 +49,17 @@ def before_all(context):
     # Add a card to the user User
     ApiAccountService.add_master_credit(context.usuario_user_valido, context.token_admin, master_credit)
 
-    log("Starting Playwright")
+    log_message("Starting Playwright")
     context.playwright = sync_playwright().start()
     context.browser = context.playwright.chromium.launch(headless=is_on_github_actions())
 
 def before_scenario(context, scenario):
-    log("Creating a new Playwright page")
+    log_message("Creating a new Playwright page")
     context.page = context.browser.new_page()
     context.base_url = SITE_BASE_URL
     context.page.goto(f"{SITE_BASE_URL}/")
 
-    log("Initializing all Page Objects")
+    log_message("Initializing all Page Objects")
     context.menu_page = MenuPage(context.page)
     context.login_modal = LoginModal(context.page)
     context.login_page = LoginPage(context.page, context.base_url)
@@ -72,11 +72,11 @@ def before_scenario(context, scenario):
     context.order_confirmation_page = OrderConfirmationPage(context.page, context.base_url)
 
 def after_scenario(context, scenario):
-    log("Closing the Playwright page")
+    log_message("Closing the Playwright page")
     context.page.close()
 
 def after_all(context):
-    log("Finishing Playwright")
+    log_message("Finishing Playwright")
     context.browser.close()
     context.playwright.stop()
 

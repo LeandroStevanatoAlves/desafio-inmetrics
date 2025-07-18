@@ -47,6 +47,7 @@ def step_impl(context):
     context.order_confirmation_page.verify_order_number_label()
     context.order_confirmation_page.verify_tracking_number_label()
 
+
 @then(u'the customer is redirected to the login screen')
 def step_impl(context):
     context.login_page.verify_order_payment_message()
